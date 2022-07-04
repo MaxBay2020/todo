@@ -1,5 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import './counter.css'
+import { useNavigate } from 'react-router-dom'
 
 const Counter = () => {
     let name = 'max'
@@ -17,9 +18,14 @@ const Counter = () => {
     }
 
     useEffect(() => {
-        console.log('我是useEffect')
+
     }, []);
 
+    const navigate = useNavigate()
+
+    const goHome = () => {
+        navigate('/')
+    }
 
     return (
         <>
@@ -30,6 +36,7 @@ const Counter = () => {
                 <button onClick={()=>addition()}>+</button>
             </section>
             <h2>{name}</h2>
+            <button onClick={()=>goHome()}>Go Back to Home Page</button>
         </>
     );
 };

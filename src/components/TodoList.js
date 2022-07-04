@@ -1,8 +1,11 @@
 import React, {useEffect, useState} from 'react';
 import axios from 'axios'
 import TodoItem from "./TodoItem";
+import {Link, useLocation} from "react-router-dom";
 
 const TodoList = () => {
+    const location = useLocation()
+
     const [list, setList] = useState([]);
 
     useEffect(() => {
@@ -21,12 +24,13 @@ const TodoList = () => {
             {
                 list.map( (todo, index) => {
                     return (
-                        <TodoItem
-                            key={index}
-                            id={todo.id}
-                            title={todo.title}
-                            completed={todo.completed}
-                        />
+                       <Link key={index} to={`/todos/${todo.id}`}>
+                           <TodoItem
+                               id={todo.id}
+                               title={todo.title}
+                               completed={todo.completed}
+                           />
+                       </Link>
                     )
                 } )
             }

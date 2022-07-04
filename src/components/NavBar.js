@@ -1,17 +1,32 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import './navbar.css'
+import {Link, useLocation} from "react-router-dom";
 
 const NavBar = () => {
-    let count = 0
-    for (let i = 0; i < 10; i++) {
-        count++
-    }
+
+    const location = useLocation()
+    const {pathname} = location
+
+    const navbarData = [
+        {destination: '/', title: 'Home'},
+        {destination: '/todos', title: 'Todos'},
+        {destination: '/counter', title: 'Counter'},
+        // {destination: '/contact', title: 'Contact'},
+    ]
 
     return (
         <section className='navbar'>
-            <h1>JSX语法</h1>
-            <h2>123</h2>
-            <h1>Count: <span>{count}</span></h1>
+            <ul>
+                {
+                    navbarData.map((data, index) => (
+                        <Link key={index} to={data.destination}><li className={`${pathname === data.destination && 'active'}`}>{data.title}</li></Link>
+                    ))
+                }
+
+                {/*<Link to="/"><li className={`${pathname === '/' ? 'active' : ''}`}>Home</li></Link>*/}
+                {/*<Link to="/todos"><li className={`${pathname === '/todos' ? 'active' : ''}`}>Todos</li></Link>*/}
+                {/*<Link to="/counter"><li className={`${pathname === '/counter' ? 'active' : ''} `}>Counter</li></Link>*/}
+            </ul>
         </section>
     );
 };
